@@ -1,0 +1,16 @@
+{
+  "name": "angular_domain_tagger_jr",
+  "version": "1.0.0",
+  "authors": [
+    "Jason Baker <jason.d.baker@gmail.com>"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "angular-ui-router": "~0.2.15",
+    "angularjs": "~1.4.1",
+    "bootstrap": "~3.3.5"
+  }
+}

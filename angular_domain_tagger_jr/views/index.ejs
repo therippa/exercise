@@ -1,0 +1,70 @@
+<html>
+<head>
+    <title>Domain Tagging, Jr.</title>
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body ng-app="domain-tagging-jr" ng-controller="MainCtrl">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="page-header">
+                <h1>Domain Tagging, Jr.</h1>
+            </div>
+
+            <ui-view></ui-view>
+        </div>
+    </div>
+
+    <script type="text/ng-template" id="/home.html">
+
+        <h3>Add a new domain</h3>
+
+        <form ng-submit="addDomain()">
+
+            <div class="form-group" ng-class="{'has-error': error}">
+                <label class="control-label" for="inputName">Domain Name</label>
+                <input type="text"
+                       id="inputName"
+                       class="form-control"
+                       placeholder="Name"
+                       ng-model="name">
+                <div class="control-label" ng-show="error">Please verify your domain name is formatted correctly.</div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="inputDescription">Description</label>
+                <input type="text"
+                       id="inputDescription"
+                       class="form-control"
+                       placeholder="Description"
+                       ng-model="description">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+
+        <table class="table table-bordered">
+            <thead>
+                <th>Domain Name</th>
+                <th>Description</th>
+                <th>Date Created</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="domain in domains | orderBy : '-created'" ng-class="{'danger': !domain.valid}">
+                    <td>{{domain.name}}</td>
+                    <td>{{domain.description}}</td>
+                    <td>{{domain.created | date : 'short'}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </script>
+
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+    <script src="/javascripts/uri.js"></script>
+    <script src="/javascripts/angularApp.js"></script>
+
+</body>
+</html>
