@@ -4,7 +4,7 @@ from django.db import models
 
 class ShortUrlManager(models.Manager):
     def create_url(self, url):
-        url_hash = os.urandom(32).encode('hex')[0:8]
+        url_hash = os.urandom(4).encode('hex')
         return self.create(original_url=url, url_hash=url_hash)
 
 
