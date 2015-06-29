@@ -6,8 +6,9 @@ The exercise:
 
 
 ### Things I Did
-1. Used Django to provide web service calls
-2. Used memcachier/memcached to hold previous calls in memory, increasing performance when dealing with domains/urls already checked
+1. Used Django to provide web service calls.
+2. Used memcachier/memcached to hold previous calls in memory, increasing performance when dealing with domains/urls already checked.
+3. Used indexing for speedy retrieval, and duplicate checks to make sure a URL is only stored one time.
 
 ### Service Endpoints
 * **phish/generate/?url=\<url\>** - checks the given url against the list of known phishing URL's provided by PhishTank, and if it's good, returns a hash that can be used in a shortened url.
