@@ -76,7 +76,7 @@ app.controller('MainCtrl', [
                 }
             };
 
-            // ajax call to WHOIS service
+            // ajax call to ip service
             $http(req).success(function(data) {
                 console.log(data);
                 if (!data.valid) {
