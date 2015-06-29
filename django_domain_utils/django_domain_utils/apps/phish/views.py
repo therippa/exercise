@@ -1,11 +1,21 @@
 from django.core.cache import cache
 from django.http import HttpResponse
+from django.shortcuts import redirect
+
+from .models import ShortUrl
+
 import base64
 import unirest
 import json
 
+# handle shortened url requests
+def index(request, url_hash):
+    short_url = ShortUrl.objects.get(url_hash=url_hash)
 
-def index(request):
+    return redirect(short_url.original_url)
+
+
+def generate(request):
     url = request.GET.get('url', '')
 
     # check cache
@@ -20,9 +30,17 @@ def index(request):
             },
         )
 
+        # check if it's a phish site, if not, create short_url
+        if not response.body["results"]["in_database"]:
+            short_url = ShortUrl.objects.create_url(url)
+            response.body['url_hash'] = short_url.url_hash
+        else:
+            response.body['url_hash'] = "PHISHING_SITE"
+
         # set cache
         cache.set(url, response)
         response.body['cached'] = False
+
     else:
         # url has already been checked
         response = cache.get(url)
